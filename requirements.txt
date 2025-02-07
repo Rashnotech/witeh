@@ -1,0 +1,10 @@
+fastapi
+pymongo
+motor
+pydantic
+python-jose
+passlib
+python-multipart
+emails
+python-dotenv
+bcrypt
