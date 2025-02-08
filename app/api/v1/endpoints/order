@@ -2,8 +2,8 @@
 from typing import List
 from fastapi import APIRouter, Depends, HTTPException
 from app.core.deps import get_current_user, get_db
-from app.models.order import Order
-from app.schemas.order import OrderCreate, OrderResponse
+from models.order import Order
+from models.order import OrderCreate, OrderResponse
 from app.crud.order import OrderCRUD
 
 router = APIRouter()

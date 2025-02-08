@@ -5,7 +5,7 @@ from fastapi.security import OAuth2PasswordBearer
 from jose import jwt, JWTError
 from motor.motor_asyncio import AsyncIOMotorClient
 from app.core.config import settings
-from app.models.user import User
+from models.user import User
 from app.crud.user import UserCRUD
 
 

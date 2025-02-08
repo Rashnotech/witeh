@@ -4,6 +4,7 @@ from typing import List, Optional
 from enum import Enum
 from pydantic import BaseModel, Field
 from .base import TimestampModel
+from datetime import datetime
 
 
 class OrderStatus(str, Enum):
@@ -36,6 +37,27 @@ class Order(TimestampModel):
     order_status: OrderStatus = OrderStatus.PENDING
     carrier_name: Optional[str]
     delivery_date: Optional[datetime]
+
+
+class OrderCreate(Order):
+    pass
+   
+
+
+class OrderUpdate(BaseModel):
+    items: List[OrderItem]
+    shipping_address: ShippingAddress
+    total_amount: float
+    coupon_id: Optional[str]
+    affiliate_code: Optional[str]
+    order_status: OrderStatus
+    carrier_name: Optional[str]
+    delivery_date: Optional[datetime]
+
+class OrderResponse(Order):
+    id: str = Field(..., alias="_id")
+    created_at: datetime
+    updated_at: Optional[datetime]
 
     class Config:
         allow_population_by_field_name = True
