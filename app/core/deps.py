@@ -1,42 +1,27 @@
 #!/usr/bin/env python3
-from typing import Generator
+"""a module for dependencies"""
 from fastapi import Depends, HTTPException, status
-from fastapi.security import OAuth2PasswordBearer
-from jose import jwt, JWTError
-from motor.motor_asyncio import AsyncIOMotorClient
-from app.core.config import settings
-from models.user import User
-from app.crud.user import UserCRUD
+from auth.jwt import decode_access_token, oauth2_scheme
 
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl=f"{settings.API_V1_STR}/auth/login")
-
-async def get_db() -> AsyncIOMotorClient:
+async def get_db():
     """Get database connection"""
     from app.core.database import db
     return db
 
-async def get_current_user(
-    token: str = Depends(oauth2_scheme),
-    db: AsyncIOMotorClient = Depends(get_db)
-) -> User:
-    """Get current authenticated user"""
-    credentials_exception = HTTPException(
-        status_code=status.HTTP_401_UNAUTHORIZED,
-        detail="Could not validate credentials",
-        headers={"WWW-Authenticate": "Bearer"},
-    )
-    try:
-        payload = jwt.decode(
-            token, settings.JWT_SECRET_KEY, algorithms=[settings.JWT_ALGORITHM]
-        )
-        user_id: str = payload.get("sub")
-        if user_id is None:
-            raise credentials_exception
-    except JWTError:
-        raise credentials_exception
-        
-    user = await UserCRUD(db).get(user_id)
+
+async def get_current_user(token: str = Depends(oauth2_scheme)) -> str:
+    """Get current user"""
+    payload = await decode_access_token(token)
+    user = payload.get("sub")
     if user is None:
-        raise credentials_exception
+        raise HTTPException(status_code=400, detail="Invalid authentication")
     return user
+
+
+def require_role(role: str):
+    def role_checker(user: dict = Depends(get_current_user)):
+        if user.get("role") != role:
+            raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="No permission")
+        return user
+    return role_checker

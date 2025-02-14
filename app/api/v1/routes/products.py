@@ -4,7 +4,7 @@ from typing import List, Optional
 from fastapi import APIRouter, Depends, HTTPException, Query
 from app.core.deps import get_current_user, get_db
 from models.product import ProductCreate, ProductResponse
-from app.crud.product import ProductCRUD
+from app.services.product_service import ProductService
 
 router = APIRouter()
 
@@ -17,7 +17,7 @@ async def create_product(
     """Create a new product"""
     if current_user.role not in ["admin", "store-owner"]:
         raise HTTPException(status_code=403, detail="Not enough permissions")
-    return await ProductCRUD(db).create(product)
+    return await ProductService(db).create(product)
 
 @router.get("/", response_model=List[ProductResponse])
 async def list_products(
@@ -34,7 +34,7 @@ async def list_products(
     if search:
         filters["$text"] = {"$search": search}
     
-    return await ProductCRUD(db).get_multi(
+    return await ProductService(db).get_multi(
         skip=skip,
         limit=limit,
         filters=filters
@@ -46,7 +46,7 @@ async def get_product(
     db = Depends(get_db)
 ):
     """Get a specific product by ID"""
-    product = await ProductCRUD(db).get(product_id)
+    product = await ProductService(db).get(product_id)
     if not product:
         raise HTTPException(status_code=404, detail="Product not found")
     return product

@@ -1,14 +1,16 @@
 #!/usr/bin/env python3
 """CRUD operations for product"""
 from typing import List, Optional, Dict, Any
-from bson import ObjectId
+from bson import ObjectId # type: ignore
 from fastapi import HTTPException
-from motor.motor_asyncio import AsyncIOMotorDatabase
+from motor.motor_asyncio import AsyncIOMotorDatabase # type: ignore
 from models.product import ProductCreate, ProductUpdate
 from datetime import datetime
 
-class ProductCRUD:
+
+class ProductService:
     def __init__(self, db: AsyncIOMotorDatabase):
+        """initialization"""
         self.db = db
         self.collection = db.products
 

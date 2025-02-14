@@ -9,7 +9,7 @@ class Setting(BaseSettings):
     PROJECT_DESCRIPTION: str = "Ecommerce REST API built with FastApi and MongoDB"
     API_V1_STR: str = "/api/v1"
     MONGODB_URL: str = "mongodb://localhost:27017"
-    DATABASE_NAME: str = "witech_ecommerce"
+    DATABASE_NAME: str = "witeh_db"
     ALLOWED_ORIGINS: List[str] = ["http://localhost:3000"]
     JWT_SECRET_KEY: str
     JWT_ALGORITHM: str = "HS256"
@@ -22,7 +22,7 @@ class Setting(BaseSettings):
     MAIL_SERVER: str = "smtp.gmail.com"
     MAIL_TLS: bool = True
     MAIL_SSL: bool = False
-    MAIL_FROM_NAME: str = "Witeh shopping made easy"
+    MAIL_FROM_NAME: str = "Witeh Ecommerce"
 
     class Config:
         env_file = ".env"
