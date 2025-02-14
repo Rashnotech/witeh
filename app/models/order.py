@@ -60,8 +60,8 @@ class OrderResponse(Order):
     updated_at: Optional[datetime]
 
     class Config:
-        allow_population_by_field_name = True
-        schema_extra = {
+        poulate_by_name = True
+        json_schema_extra = {
             "example": {
                 "customer_id": "user123",
                 "items": [

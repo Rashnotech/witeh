@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """a module for auth routes"""
 from fastapi import APIRouter, HTTPException, status, Depends
-from app.auth.jwt import create_access_token
-from app.core.deps import get_db
-from app.auth.password import verify_password
-from app.services.user_service import UserService
-from app.services.token_service import TokenService
+from auth.jwt import create_access_token
+from core.deps import get_db
+from auth.password import verify_password
+from services.user_service import UserService
+from services.token_service import TokenService
 from datetime import timedelta
 
 router = APIRouter()

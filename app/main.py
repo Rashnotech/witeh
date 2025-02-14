@@ -2,9 +2,9 @@
 """a module for main app"""
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.core.config import settings
-from app.core.database import connect_to_mongo, close_mongo_connection
-from app.api.v1.router import api_router
+from core.config import settings
+from core.database import connect_to_mongo, close_mongo_connection
+from api.v1.router import api_router
 
 
 app = FastAPI(

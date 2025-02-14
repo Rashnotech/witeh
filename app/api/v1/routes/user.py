@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """a router for users"""
 from fastapi import APIRouter, Depends
-from app.core.deps import get_current_user, get_db
+from core.deps import get_current_user, get_db
 from models.user import UserCreate, UserResponse
-from app.services.user_service import UserService
+from services.user_service import UserService
 
 
 router = APIRouter()

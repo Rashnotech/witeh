@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """a module for api models"""
 from fastapi import APIRouter
-from app.api.v1.routes import user
-from app.api.v1.routes import auth
+from api.v1.routes import user
+from api.v1.routes import auth
 
 
 api_router = APIRouter()

@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 """a module for refresh module"""
 from datetime import datetime, timezone
-from pydantic import BaseModel, EmailStr, Field
-from typing import Optional
+from pydantic import BaseModel, EmailStr
 
 
 class Token(BaseModel):
@@ -26,4 +25,4 @@ class StoredToken(BaseModel):
     role: str
     expires_at: datetime
     is_revoked: bool = False
-    created_at: datetime = Field(default_factory=datetime.now(timezone.utc))
+    created_at: datetime = datetime.now(timezone.utc)

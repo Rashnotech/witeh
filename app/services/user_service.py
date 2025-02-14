@@ -16,7 +16,11 @@ class UserService:
 
     async def create(self, user: Dict[str, Any]) -> Dict[str, Any]:
         """Create a new user."""
+        # - buyer, affiliate, store-owner, admin
+        # - google, email
         user_dict = user
+        if user["auth_provider"] == "google":
+            pass
         if await self.collection.find_one({"email": user_dict["email"]}):
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,

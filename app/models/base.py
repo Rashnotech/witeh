@@ -6,5 +6,5 @@ from pydantic import BaseModel, Field
 
 
 class TimestampModel(BaseModel):
-    created_at: datetime = Field(default_factory=datetime.now(timezone.utc))
+    created_at: datetime = datetime.now(timezone.utc)
     updated_at: Optional[datetime] = None

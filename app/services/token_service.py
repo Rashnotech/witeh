@@ -3,9 +3,9 @@
 from datetime import datetime, timezone, timedelta
 from bson import ObjectId # type: ignore
 from typing import Optional
-from app.models.token import TokenData, StoredToken
+from models.token import TokenData, StoredToken
 from motor.motor_asyncio import AsyncIOMotorDatabase # type: ignore
-from app.auth.jwt import create_access_token, decode_access_token
+from auth.jwt import create_access_token, decode_access_token
 
 
 class TokenService:

@@ -7,6 +7,8 @@ from jinja2 import Environment, select_autoescape, FileSystemLoader
 from typing import List, Dict, Any
 from app.core.config import settings
 import logging
+from itsdangerous import URLSafeTimedSerializer
+
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)

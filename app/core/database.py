@@ -1,5 +1,7 @@
+#!/usr/bin/env python3
+"""a module for database connection"""
 from motor.motor_asyncio import AsyncIOMotorClient, AsyncIOMotorDatabase # type: ignore
-from app.core.config import settings
+from core.config import settings
 
 
 class Database:
